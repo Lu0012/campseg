@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerenciamento Interno</title>
+  
+
+  
+  <style>
+
+  :root {
+    --preto: #242222;
+    --amarelo: #e4cf5c;
+    --cinza-claro: #f0f0f0;
+    --cinza: #333;
+    --borda: #555;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--preto);
+    color: var(--amarelo);
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    color: var(--amarelo);
+  }
+
+  .tabs {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .tabs button {
+    background-color: var(--amarelo);
+    color: var(--preto);
+    border: none;
+    padding: 10px 10px;
+    margin: 0 5px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border-style: 10px;
+  }
+
+  .tabs button:hover {
+    background-color: #ffec80;
+  }
+
+  .section {
+    display: none;
+    background-color: var(--cinza);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  input, button {
+    padding: 8px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+
+  input {
+    width: 180px;
+    background-color: #fff;
+    color: #000;
+  }
+
+  button {
+    background-color: var(--amarelo);
+    color: var(--preto);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #ffe25e;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #222;
+    color: var(--amarelo);
+  }
+
+  th, td {
+    border: 1px solid var(--borda);
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: var(--amarelo);
+    color: var(--preto);
+  }
+
+  tr:nth-child(even) td {
+    background-color: #2a2a2a;
+  }
+
+  tr:hover td {
+    background-color: #333;
+  }
+
+ 
+
+</style>
+  
+  
+  
+</head>
+
+
+
+<body>
+  <div id="img">
+  <img src="./img/campseg-removebg-preview.png"  width="100px" height="100px" alt="">
+  </div>  
+  <h1>Gerenciamento Interno</h1>
+
+  <div class="tabs">
+    <button onclick="showSection('efetivo')">Efetivo</button>
+    <button onclick="showSection('inventario')">Inventário</button>
+    <button onclick="showSection('manutencao')">Manutenção</button>
+    <button onclick="showSection('gastos')">Gastos</button>
+  </div>
+
+  <!-- Efetivo -->
+  <div id="efetivo" class="section active">
+    <h2>Efetivo</h2>
+    <input placeholder="Nome" id="nomeEfetivo">
+    <input placeholder="Setor" id="setorEfetivo">
+    <input placeholder="Função" id="funcaoEfetivo">
+    <input placeholder="Atestados" type="number" id="atestadosEfetivo">
+    <button onclick="adicionarEfetivo()">Adicionar</button>
+    <table id="tabelaEfetivo">
+      <tr><th>Nome</th><th>Setor</th><th>Função</th><th>Atestados</th></tr>
+    </table>
+  </div>
+
+  <!-- Inventário -->
+  <div id="inventario" class="section">
+    <h2>Inventário</h2>
+    <input placeholder="Item" id="itemInventario">
+    <input placeholder="Quantidade" type="number" id="qtdInventario">
+    <input placeholder="Local" id="localInventario">
+    <button onclick="adicionarInventario()">Adicionar</button>
+    <table id="tabelaInventario">
+      <tr><th>Item</th><th>Quantidade</th><th>Local</th></tr>
+    </table>
+  </div>
+
+  <!-- Manutenção -->
+  <div id="manutencao" class="section">
+    <h2>Manutenção</h2>
+    <input placeholder="Tipo (Preventiva/Corretiva)" id="tipoManutencao">
+    <input placeholder="Item" id="itemManutencao">
+    <input placeholder="Data" type="date" id="dataManutencao">
+    <button onclick="adicionarManutencao()">Adicionar</button>
+    <table id="tabelaManutencao">
+      <tr><th>Tipo</th><th>Item</th><th>Data</th></tr>
+    </table>
+  </div>
+
+  <!-- Gastos -->
+  <div id="gastos" class="section">
+    <h2>Gastos</h2>
+    <input placeholder="Descrição" id="descGasto">
+    <input placeholder="Valor (R$)" type="number" id="valorGasto">
+    <input placeholder="Data" type="date" id="dataGasto">
+    <button onclick="adicionarGasto()">Adicionar</button>
+    <table id="tabelaGastos">
+      <tr><th>Descrição</th>
+      <th>Valor (R$)</th>
+      <th>Data</th></tr>
+    </table>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function adicionarEfetivo() {
+      const nome = document.getElementById('nomeEfetivo').value;
+      const setor = document.getElementById('setorEfetivo').value;
+      const funcao = document.getElementById('funcaoEfetivo').value;
+      const atestados = document.getElementById('atestadosEfetivo').value;
+      const tabela = document.getElementById('tabelaEfetivo');
+      const linha = tabela.insertRow();
+      linha.innerHTML = `<td>${nome}</td><td>${setor}</td><td>${funcao}</td><td>${atestados}</td>`;
+    }
+
+    function adicionarInventario() {
+      const item = document.getElementById('itemInventario').value;
+      const qtd = document.getElementById('qtdInventario').value;
+      const local = document.getElementById('localInventario').value;
+      const tabela = document.getElementById('tabelaInventario');
+      const linha = tabela.insertRow();
+      linha.innerHTML = `<td>${item}</td><td>${qtd}</td><td>${local}</td>`;
+    }
+
+    function adicionarManutencao() {
+      const tipo = document.getElementById('tipoManutencao').value;
+      const item = document.getElementById('itemManutencao').value;
+      const data = document.getElementById('dataManutencao').value;
+      const tabela = document.getElementById('tabelaManutencao');
+      const linha = tabela.insertRow();
+      linha.innerHTML = `<td>${tipo}</td><td>${item}</td><td>${data}</td>`;
+    }
+
+    function adicionarGasto() {
+      const desc = document.getElementById('descGasto').value;
+      const valor = document.getElementById('valorGasto').value;
+      const data = document.getElementById('dataGasto').value;
+      const tabela = document.getElementById('tabelaGastos');
+      const linha = tabela.insertRow();
+      linha.innerHTML = `<td>${desc}</td><td>R$ ${parseFloat(valor).toFixed(2)}</td><td>${data}</td>`;
+    }
+  </script>
+</body>
+</html>
