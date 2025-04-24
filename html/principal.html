@@ -9,115 +9,245 @@
   
   <style>
 
-  :root {
-    --preto: #242222;
-    --amarelo: #e4cf5c;
-    --cinza-claro: #f0f0f0;
-    --cinza: #333;
-    --borda: #555;
-  }
+:root {
+  --preto: #121212;
+  --preto-card: #1e1e1e;
+  --amarelo: #ffd700;
+  --amarelo-suave: rgba(255, 215, 0, 0.1);
+  --texto-primario: rgba(255, 255, 255, 0.87);
+  --texto-secundario: rgba(255, 255, 255, 0.6);
+  --borda: #333;
+  --sombra: rgba(0, 0, 0, 0.3);
+  --elevation-1: 0 2px 4px var(--sombra);
+  --elevation-2: 0 4px 8px var(--sombra);
+}
 
+body {
+  font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--preto);
+  color: var(--texto-primario);
+  padding: 20px;
+  line-height: 1.6;
+  max-width: 1200px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 2.2em;
+  color: var(--amarelo);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.tabs {
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tabs button {
+  background-color: transparent;
+  color: var(--texto-secundario);
+  border: none;
+  padding: 12px 24px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95em;
+  position: relative;
+  overflow: hidden;
+}
+
+.tabs button:hover {
+  color: var(--texto-primario);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tabs button.active {
+  color: var(--amarelo);
+  background-color: var(--amarelo-suave);
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background-color: var(--amarelo);
+  border-radius: 2px;
+}
+
+.section {
+  display: none;
+  background-color: var(--preto-card);
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 16px;
+  box-shadow: var(--elevation-1);
+  border: 1px solid var(--borda);
+}
+
+.section.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input, button {
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+  outline: none;
+  font-size: 1em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input {
+  width: 100%;
+  max-width: 300px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--texto-primario);
+  caret-color: var(--amarelo);
+}
+
+input:focus {
+  border-color: var(--amarelo);
+  box-shadow: 0 0 0 2px var(--amarelo-suave);
+}
+
+button {
+  background-color: var(--amarelo);
+  color: #121212;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 12px 24px;
+  border: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  box-shadow: var(--elevation-1);
+}
+
+button:hover {
+  background-color: #ffdf40;
+  box-shadow: var(--elevation-2);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  background-color: var(--preto-card);
+  color: var(--texto-primario);
+  box-shadow: var(--elevation-1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border-bottom: 1px solid var(--borda);
+  padding: 16px;
+  text-align: left;
+}
+
+th {
+  background-color: rgba(255, 215, 0, 0.15);
+  color: var(--amarelo);
+  font-weight: 500;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Componentes adicionais */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 400;
+  color: var(--texto-secundario);
+  font-size: 0.9em;
+}
+
+/* Efeitos de hover para cards */
+.card {
+  background-color: var(--preto-card);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: var(--elevation-2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--preto);
-    color: var(--amarelo);
-    padding: 20px;
+    padding: 16px;
   }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2em;
-    color: var(--amarelo);
-  }
-
+  
   .tabs {
-    text-align: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
   }
-
+  
   .tabs button {
-    background-color: var(--amarelo);
-    color: var(--preto);
-    border: none;
-    padding: 10px 10px;
-    margin: 0 5px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    border-style: 10px;
+    padding: 10px 16px;
+    font-size: 0.85em;
   }
-
-  .tabs button:hover {
-    background-color: #ffec80;
-  }
-
-  .section {
-    display: none;
-    background-color: var(--cinza);
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
-
-  .section.active {
-    display: block;
-  }
-
-  input, button {
-    padding: 8px;
-    margin: 5px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-  }
-
+  
   input {
-    width: 180px;
-    background-color: #fff;
-    color: #000;
+    max-width: 100%;
   }
+}
 
-  button {
-    background-color: var(--amarelo);
-    color: var(--preto);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-  button:hover {
-    background-color: #ffe25e;
-  }
+::-webkit-scrollbar-track {
+  background: var(--preto-card);
+}
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background-color: #222;
-    color: var(--amarelo);
-  }
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
 
-  th, td {
-    border: 1px solid var(--borda);
-    padding: 10px;
-    text-align: left;
-  }
-
-  th {
-    background-color: var(--amarelo);
-    color: var(--preto);
-  }
-
-  tr:nth-child(even) td {
-    background-color: #2a2a2a;
-  }
-
-  tr:hover td {
-    background-color: #333;
-  }
-
+::-webkit-scrollbar-thumb:hover {
+  background: var(--amarelo);
+}
  
 
 </style>
@@ -130,7 +260,7 @@
 
 <body>
   <div id="img">
-  <img src="./img/campseg-removebg-preview.png"  width="100px" height="100px" alt="">
+  <img src="../img/campseg-removebg-preview.png"  width="100px" height="100px" alt="">
   </div>  
   <h1>Gerenciamento Interno</h1>
 

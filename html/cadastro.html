@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro</title>
+    <style>
+        :root {
+  --dark-bg: #121212;
+  --dark-surface: #1e1e1e;
+  --dark-primary: #FFD700; /* Amarelo dourado */
+  --dark-primary-hover: #FFDF40; /* Amarelo mais claro para hover */
+  --dark-text-primary: rgba(255, 255, 255, 0.87);
+  --dark-text-secondary: rgba(255, 255, 255, 0.6);
+  --dark-border: #333;
+  --dark-error: #CF6679;
+  --dark-success: #4CAF50;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--dark-text-primary);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--dark-text-secondary);
+  font-size: 0.9em;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--dark-border);
+  border-radius: 6px;
+  color: var(--dark-text-primary);
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--dark-primary);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+button {
+  background-color: var(--dark-primary);
+  color: #121212; /* Texto preto para melhor contraste */
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1em;
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+button:hover {
+  background-color: var(--dark-primary-hover);
+  transform: translateY(-1px);
+}
+
+.error {
+  color: var(--dark-error);
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+}
+
+.success {
+  color: var(--dark-success);
+  font-size: 0.9em;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 6px;
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+    <h1>Sistema de Cadastro</h1>
+    
+    <div id="form-container">
+        <h2>Cadastro</h2>
+        <form id="cadastro-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" required minlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmar-senha">Confirmar Senha:</label>
+                <input type="password" id="confirmar-senha" required>
+            </div>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <div id="mensagem" class=""></div>
+    </div>
+    
+    <script src="..//cadastro.js"></script>
+</body>
+</html>

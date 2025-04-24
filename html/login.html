@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Cadastro</title>
+    <style>
+        :root {
+  --dark-bg: #121212;
+  --dark-surface: #1e1e1e;
+  --dark-primary: #FFD700;  /* Amarelo dourado */
+  --dark-primary-hover: #FFDF40;  /* Amarelo mais claro para hover */
+  --dark-primary-light: rgba(255, 215, 0, 0.1);  /* Amarelo claro transparente */
+  --dark-secondary: #00BFA5;
+  --dark-error: #CF6679;
+  --dark-text-primary: rgba(255, 255, 255, 0.87);
+  --dark-text-secondary: rgba(255, 255, 255, 0.6);
+  --dark-border: #333;
+  --dark-hover: rgba(255, 255, 255, 0.08);
+  --dark-focus: rgba(255, 255, 255, 0.12);
+  --dark-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--dark-text-primary);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+.form-container {
+  background-color: var(--dark-surface);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: var(--dark-shadow);
+  border: 1px solid var(--dark-border);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--dark-primary);
+  font-weight: 500;
+  font-size: 1.8em;
+  letter-spacing: 0.5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--dark-text-secondary);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--dark-border);
+  border-radius: 8px;
+  color: var(--dark-text-primary);
+  font-size: 1em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--dark-primary);
+  background-color: var(--dark-hover);
+  box-shadow: 0 0 0 2px var(--dark-primary-light);
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--dark-primary);
+  color: #121212;  /* Texto preto para melhor contraste */
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: var(--dark-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.error {
+  color: var(--dark-error);
+  font-size: 0.85em;
+  margin-top: 6px;
+  display: block;
+  padding-left: 4px;
+}
+
+.success {
+  color: var(--dark-primary);
+  font-size: 0.95em;
+  margin: 20px 0;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--dark-primary-light);
+  border-radius: 8px;
+  border-left: 4px solid var(--dark-primary);
+}
+
+.link-cadastro {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--dark-text-secondary);
+  font-size: 0.95em;
+}
+
+.link-cadastro a {
+  color: var(--dark-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-cadastro a:hover {
+  color: var(--dark-primary-hover);
+  text-decoration: underline;
+}
+
+/* Ícone para link (opcional) */
+.link-cadastro a::after {
+  content: "→";
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.link-cadastro a:hover::after {
+  transform: translateX(3px);
+}
+
+/* Efeito para inputs com erro */
+input.error-input {
+  border-color: var(--dark-error);
+  background-color: rgba(207, 102, 121, 0.1);
+}
+
+/* Password toggle */
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--dark-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.toggle-password:hover {
+  color: var(--dark-primary);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  body {
+    padding: 16px;
+  }
+  
+  .form-container {
+    padding: 24px;
+  }
+  
+  .form-title {
+    font-size: 1.5em;
+  }
+}
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    
+    <div id="form-container">
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-email">Email ou Login:</label>
+                <input type="text" id="login-email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-senha">Senha:</label>
+                <input type="password" id="login-senha" required>
+            </div>
+            
+            <button type="submit">Entrar</button>
+            
+            <div id="login-mensagem" class=""></div>
+        </form>
+        
+        <div class="link-cadastro">
+            <p>Não tem uma conta? <a href="index.html">Cadastre-se</a></p>
+        </div>
+    </div>
+    
+    <script src="..//login.js"></script>
+</body>
+</html>
